@@ -1,13 +1,13 @@
-# Acceso a módulos privados
+# FAD Modules (Angular)
 
-1) Los módulos son privados, por lo tanto necesitarás de un token para poder instalarlos, pide al equipo de producto dicho accesso.
+## Pre-instalación
 
-2) Ya teniendo el acceso, crea un archivo con nombre **.npmrc** al mismo nivel que el archivo **package.json**
+Por seguridad los paquetes son privados, para poder hacer uso se requiere de un token de acceso que el equipo de producto te proporcionará.
 
-3) Pega el acceso y guarda el archivo
+Una vez obtenido el token, deberán crear un archivo llamado **.npmrc**, al mismo nivel que el archivo **package.json**, el contenido del archivo será el siguiente y sólo se debe reemplazar el token de ejemplo por el token proporcionado.:
 
 ``` json
-//registry.npmjs.org/:_authToken=npm_XXXXXXXXXXXXXXXXXX
+	//registry.npmjs.org/:_authToken=npm_XXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 ``` 
 
-4) Procede a installar los módulos a ocupar.
+Una vez guardado el archivo, podemos proceder a instalar los módulos.

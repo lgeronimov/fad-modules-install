@@ -23,13 +23,11 @@ In assets of angular.json file add
 
 ```json
 "assets": [
-  ...
     {
       "glob": "**/*",
-      "input": "node_modules/ng-fad-pdf-reader/assets",
+      "input": "node_modules/@fad-producto/ng-fad-pdf-reader/assets",
       "output": "/assets/"
     }
-    ...
 ```
 
 

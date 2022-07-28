@@ -17,6 +17,21 @@ Add the folder provided by the technical team within the project assets (images 
 Add service inside some component:
 
 
+## Add
+
+In assets of angular.json file add
+
+```json
+"assets": [
+  ...
+    {
+      "glob": "**/*",
+      "input": "node_modules/ng-fad-pdf-reader/assets",
+      "output": "/assets/"
+    }
+    ...
+```
+
 
 ## Import
 
@@ -26,7 +41,7 @@ In the necessary file *example.component.ts* import the service.
 ## Typescript
 
 ``` ts
-  import { NgFadPdfReaderService } from '@fad-producto/ng-fad-pdfjs-reader';
+  import { NgFadPdfReaderService } from '@fad-producto/ng-fad-pdf-reader';
   .
   .
   .
@@ -34,7 +49,7 @@ In the necessary file *example.component.ts* import the service.
   constructor(private pdfReader: NgFadPdfReaderService) { }
 
   ngOnInit() {
-    // 1.- Observe if pdfjs is ready
+    // 1.- Observe if pdf is ready
     this.pdfReader.verifyStatePdf.subscribe(res => {
       if (res) {
         // do something

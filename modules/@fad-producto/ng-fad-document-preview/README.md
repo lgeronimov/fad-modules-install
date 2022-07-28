@@ -123,5 +123,5 @@ export class PdfResource {
 | Name             | Return  | Description                             |
 | ---------------- | ------- | --------------------------------------- |
 | onnext           | string  | Is called when user ends the process    |
-| onerror          | void    | Is called when an error happens         |
+| onerror          | Object  | Is called when an error happens         |
 | onrejectdocument | void    | Is called when user reject the document |

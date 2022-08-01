@@ -30,6 +30,11 @@ In angular.json file add identy assets and styles
       "glob": "**/*",
       "input": "node_modules/@identy/identy-common/dist/assets",
       "output": "./assets/"
+    },
+    {
+        "glob": "**/*",
+        "input": "node_modules/@fad-producto/ng-fad-fingerprints/assets",
+        "output": "./assets/"
     }
 ],
 "styles": [

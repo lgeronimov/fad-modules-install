@@ -3,7 +3,7 @@
 ## Installation
 
 ```
-npm install @fad-portal/ng-fad-privacy-notice
+npm install @fad-producto/ng-fad-privacy-notice
 ```
 
 ## Assets

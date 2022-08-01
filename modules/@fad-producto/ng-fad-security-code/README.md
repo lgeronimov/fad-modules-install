@@ -14,6 +14,8 @@ Add into the assets array (*angular.json*) the next lines:
   "input": "node_modules/@fad-producto/ng-fad-security-code/assets",
   "output": "./assets/"
 }
+```
+
 
 ## Dependencies
 

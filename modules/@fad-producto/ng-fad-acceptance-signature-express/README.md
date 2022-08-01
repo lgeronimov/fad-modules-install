@@ -17,6 +17,11 @@ Add into the assets array (*angular.json*) the next lines:
   "glob": "**/*",
   "input": "node_modules/@fad-producto/ng-fad-pdf-reader/assets",
   "output": "./assets/"
+},
+{
+  "glob": "**/*",
+  "input": "node_modules/@fad-producto/ng-fad-acceptance-signature-express/assets",
+  "output": "./assets/"
 }
 ``` 
 

@@ -6,6 +6,15 @@
 npm install @fad-producto/ng-fad-security-code
 ```
 
+## Assets
+Add into the assets array (*angular.json*) the next lines:
+``` json
+{
+  "glob": "**/*",
+  "input": "node_modules/@fad-producto/ng-fad-security-code/assets",
+  "output": "./assets/"
+}
+
 ## Dependencies
 
 Add the folder provided by the technical team within the project assets (images and js)

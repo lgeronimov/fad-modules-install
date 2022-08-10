@@ -6,9 +6,10 @@
 npm install @fad-producto/ng-fad-regula-id
 ```
 
-## Dependencies
-
-Add the folder provided by the technical team within the project assets (images and js)
+## Update
+``` bash
+npm install @fad-producto/ng-fad-regula-id@latest
+```
 
 ## Import
 
@@ -17,7 +18,7 @@ In the file necessary *example.module.ts* import the module.
 In this case  *app.module.ts*
 
 ``` ts
-import { NgFadRegulaIdModule } from '@fad-producto/ng-fad-regula-id';
+import { Configuration, CONFIGURATION_DEFAULT, Credentials, ErrorCode, ResponseError, ResponseSuccess, NgFadRegulaIdModule } from '@fad-producto/ng-fad-regula-id';
 .
 .
 .
@@ -38,12 +39,12 @@ Add the selector inside some component and configure the output events:
 
 ``` html
 <ng-fad-regula-id
-  [license]="licence"
+  [credentials]="credentials"
   [side]="side"
   [shotOne]="shotOne"
   [idData]="idData"
   [idPhoto]="idPhoto"
-  (ondata)="ondata($event)"
+  (oncomplete)="oncomplete($event)"
   (onerror)="onerror($event)">
 </ng-fad-regula-id>
 ```
@@ -54,19 +55,20 @@ Listen to the events:
 
 ``` ts
 
-license = "route to license";
-shotOne = "image base64";
-side = 0;
-idData = true;
-idPhoto = false;
+public credentials: Credentials = { license: 'license route' };
+public shotOne = "image base64 of first capture";
+public side = 0;
+public idData = true;
+public idPhoto = false;
 
-ondata(result: RegulaResult) {
+oncomplete(result: ResponseSuccess) {
   console.log(result)
 }
 
 onerror(error) {
    alert(JSON.stringify(error));
 }
+
 ```
 
 
@@ -76,17 +78,18 @@ onerror(error) {
 
 | Name           | Required   | Default             |  Type             | Description                                            |
 | -----------    | ---------- | ------------------- | ----------------- | ------------------------------------------------------ |
-| license        |   true     |   undefined         | string            | Route to license file                                  |
+| configuration  |   false    |   null              | object            | Configuration module                                   |
+| credentials    |   true     |   undefined         | Credentials       | Route to license file and request api                  |
 | side           |   true     |   0                 | 0 | 1             | Side of image to capture, 0 - Front, 1 - Back          |
-| shotOne        |   false    |   undefined         | string            | base 64 of first captured image                        |
-| idData         |   false    |   false             | boolean           | add OCR to the final response                          |
-| idPhoto        |   false    |   false             | boolean           | Image of the face cutout                               |
+| shotOne        |   false    |   undefined         | string            | Base 64 of first captured image                        |
+| idData         |   false    |   false             | boolean           | Add OCR to the final response                          |
+| idPhoto        |   false    |   false             | boolean           | Image of the face cutout, only works if idData is true |
 
 
 # Outputs
 
 
-| Name        | Return        | Description                                |
-| ----------- | ------------- | ------------------------------------------ |
-| ondata      | RegulaResult  | Fires when the module send ocr             |
-| onerror     | object        | Is called when an error happens            |
+| Name        | Return          | Description                                |
+| ----------- | --------------- | ------------------------------------------ |
+| oncomplete  | ResponseSuccess | Fires when the liveness ends successfully  |
+| onerror     | ResponseError   | Is called when an error happens            |

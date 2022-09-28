@@ -55,7 +55,11 @@ Listen to the events:
 
 ``` ts
 
-public credentials: Credentials = { license: 'license route' };
+public credentials: Credentials = {
+    license: 'assets/third-party/regula/regula.license',
+    apiBasePath: environment.BASE_URL_REGULA
+};
+
 public shotOne = "image base64 of first capture";
 public side = 0;
 public idData = true;
@@ -80,7 +84,7 @@ onerror(error) {
 | -----------    | ---------- | ------------------- | ----------------- | ------------------------------------------------------ |
 | configuration  |   false    |   null              | object            | Configuration module                                   |
 | credentials    |   true     |   undefined         | Credentials       | Route to license file and request api                  |
-| side           |   true     |   0                 | 0 | 1             | Side of image to capture, 0 - Front, 1 - Back          |
+| side           |   true     |   0                 | 0 or 1            | Side of image to capture, 0 - Front, 1 - Back          |
 | shotOne        |   false    |   undefined         | string            | Base 64 of first captured image                        |
 | idData         |   false    |   false             | boolean           | Add OCR to the final response                          |
 | idPhoto        |   false    |   false             | boolean           | Image of the face cutout, only works if idData is true |

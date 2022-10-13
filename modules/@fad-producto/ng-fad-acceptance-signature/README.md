@@ -21,11 +21,6 @@ Add into the assets array (*angular.json*) the next lines:
 }
 ```
 
-## Dependencies
-
-Add the folder provided by the technical team within the project assets (images and js)
-
-
 ## Import
 
 In the file necessary *example.module.ts* import the module.
@@ -33,7 +28,7 @@ In the file necessary *example.module.ts* import the module.
 In this case  *app.module.ts*
 
 ``` ts
-import { NgFadAcceptanceSignatureModule } from '@fad-producto/ng-fad-acceptance-signature';
+import { NgFadAcceptanceSignatureModule, IAcceptanceSignatureConfiguration, ResponseError, PdfPagesSignature, CONFIGURATION_DEFAULT } from '@fad-producto/ng-fad-acceptance-signature';
 .
 .
 .
@@ -60,7 +55,7 @@ Add the selector inside some component and configure the output events:
     [pdfResources]="pdfResources"
     (onerror)="onerror($event)"
     (onmoreinformation)="onmoreinformation()"
-    (onsigndocument)="onsigndocument()">
+    (oncomplete)="oncomplete()">
   </ng-fad-acceptance-signature>
 ```
 
@@ -75,7 +70,7 @@ pdf = 'src of your pdf';
 positionSignatures: PdfPagesSignature[];
 pdfResources = null;
 
-onerror(event) {
+onerror(event: ResponseError) {
   alert(JSON.stringify(event));
 }
 
@@ -83,28 +78,8 @@ onmoreinformation() {
   // do somethig after click in some information
 }
 
-onsigndocument() {
+oncomplete() {
   // do somethig after accept all signatures
-}
-.
-.
-.
-
-export class PdfPagesSignature {
-  page: number;
-  positionX1: number;
-  positionX2: number;
-  positionY1: number;
-  positionY2: number;
-  isSelected?: boolean;
-  id?: string;
-}
-
-export class PdfResource {
-  scriptSrc: string;
-  workerSrc: string;
-  hasError: boolean;
-  id: string;
 }
 ```
 
@@ -113,19 +88,19 @@ export class PdfResource {
 # Inputs
 
 
-| Name                  | Required   | Default             |  Type                | Description                                            |
-| ------------------    | ---------- | ------------------- | -------------------- | ------------------------------------------------------ |
-| configuration         |   false    |   object            | object               | configuration of legends                               |
-| pdf                   |   true     |   undefined         | string               | source of your pdf                                     |
-| pdfResources          |   false    |   undefined         | PdfResource[]        | modify the paths and files for the pdfjs library files |
-| positionSignatures    |   true     |   undefined         | PdfPagesSignature[]  | signature coordinates displayed in pdf                 |
+| Name                  | Required   | Default                 |  Type                             | Description                                            |
+| ------------------    | ---------- | ----------------------- | --------------------------------- | ------------------------------------------------------ |
+| configuration         |   false    |   CONFIGURATION_DEFAULT | IAcceptanceSignatureConfiguration | configuration of legends                               |
+| pdf                   |   true     |   undefined             | string                            | source of your pdf                                     |
+| pdfResources          |   false    |   undefined             | PdfResource[]                     | modify the paths and files for the pdfjs library files |
+| positionSignatures    |   true     |   undefined             | PdfPagesSignature[]               | signature coordinates displayed in pdf                 |
 
 
 # Outputs
 
 
-| Name              | Return  | Description                                   |
-| ----------------- | ------- | --------------------------------------------- |
-| onmoreinformation | void    | Is called when user click to more information |
-| onerror           | Object  | Is called when an error happens               |
-| onsigndocument    | void    | Is called when user finish the process        |
+| Name              | Return        | Description                                   |
+| ----------------- | ------------- | --------------------------------------------- |
+| onmoreinformation | void          | Is called when user click to more information |
+| onerror           | ResponseError | Is called when an error happens               |
+| oncomplete        | void          | Is called when user finish the process        |

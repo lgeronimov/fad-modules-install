@@ -28,7 +28,7 @@ In the file necessary *example.module.ts* import the module.
 In this case  *app.module.ts*
 
 ``` ts
-import { NgFadDocumentPreviewModule } from '@fad-producto/ng-fad-document-preview';
+import { NgFadDocumentPreviewModule, IDocumentPreviewConfiguration, ResponseError, CONFIGURATION_DEFAULT, STATUS_COMPONENT } from '@fad-producto/ng-fad-document-preview';
 .
 .
 .
@@ -55,7 +55,7 @@ Add the selector inside some component and configure the output events:
   [showDocumentRejection]="showDocumentRejection"
   [pdfResources]="pdfResources"
   (onerror)="onerror($event)"
-  (onnext)="onnext()"
+  (oncomplete)="oncomplete()"
   (onrejectdocument)="onrejectdocument()">
 </ng-fad-document-preview>
 ```
@@ -68,7 +68,7 @@ Listen to the events:
 
 configuration = null;
 pdf = 'src of your pdf';
-status = 'PENDING';
+status = STATUS_COMPONENT.PENDING;
 showDocumentRejection = true;
 pdfResources = null;
 
@@ -76,30 +76,13 @@ onerror(event) {
   alert(JSON.stringify(event));
 }
 
-onnext() {
+oncomplete() {
   // do something after accept document
 }
 
 onrejectdocument() {
   this.status = STATUS_COMPONENT.REJECTED;
   // do something after reject document
-}
-  
-.
-.
-.
-
-export const STATUS_COMPONENT = {
-  REJECTED: 'REJECTED',
-  PENDING: 'PENDING',
-  TO_SIGN: 'TO_SIGN',
-}
-
-export class PdfResource {
-  scriptSrc: string;
-  workerSrc: string;
-  hasError: boolean;
-  id: string;
 }
 ```
 
@@ -108,20 +91,20 @@ export class PdfResource {
 # Inputs
 
 
-| Name                  | Required   | Default             |  Type             | Description                                            |
-| ------------------    | ---------- | ------------------- | ----------------- | ------------------------------------------------------ |
-| configuration         |   false    |   object            | object            | configuration of legends                               |
-| pdf                   |   true     |   undefined         | string            | source of your pdf                                     |
-| status                |   true     |   undefined         | string            | status ofyour document                                 |
-| showDocumentRejection |   false    |   undefined         | boolean           | shows the button to reject a document                  |
-| pdfResources          |   false    |   undefined         | PdfResource[]     | modify the paths and files for the pdfjs library files |
+| Name                  | Required   | Default                 |  Type                         | Description                                            |
+| ------------------    | ---------- | ------------------------| ----------------------------- | ------------------------------------------------------ |
+| configuration         |   false    |   CONFIGURATION_DEFAULT | IDocumentPreviewConfiguration | configuration of legends and styles                    |
+| pdf                   |   true     |   undefined             | string                        | source of your pdf                                     |
+| status                |   true     |   undefined             | STATUS_COMPONENT              | status ofyour document                                 |
+| showDocumentRejection |   false    |   undefined             | boolean                       | shows the button to reject a document                  |
+| pdfResources          |   false    |   undefined             | PdfResource[]                 | modify the paths and files for the pdfjs library files |
 
 
 # Outputs
 
 
-| Name             | Return  | Description                             |
-| ---------------- | ------- | --------------------------------------- |
-| onnext           | string  | Is called when user ends the process    |
-| onerror          | Object  | Is called when an error happens         |
-| onrejectdocument | void    | Is called when user reject the document |
+| Name             | Return        | Description                             |
+| ---------------- | ------------- | --------------------------------------- |
+| oncomplete       | void          | Is called when user ends the process    |
+| onerror          | ResponseError | Is called when an error happens         |
+| onrejectdocument | void          | Is called when user reject the document |

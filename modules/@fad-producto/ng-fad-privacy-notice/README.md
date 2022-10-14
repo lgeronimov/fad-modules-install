@@ -3,7 +3,7 @@
 ## Installation
 
 ```
-npm install @fad-producto/ng-fad-privacy-notice
+npm install @fad-portal/ng-fad-privacy-notice
 ```
 
 ## Assets
@@ -16,10 +16,6 @@ Add into the assets array (*angular.json*) the next lines:
 }
 ```
 
-## Dependencies
-
-Add the folder provided by the technical team within the project assets (images and js)
-
 
 ## Import
 
@@ -28,7 +24,7 @@ In the file necessary *example.module.ts* import the module.
 In this case  *app.module.ts*
 
 ``` ts
-import { NgFadPrivacyNoticeModule } from '@fad-portal/ng-fad-privacy-notice';
+import { NgFadPrivacyNoticeModule, IPrivacyNoticeConfiguration, CONFIGURATION_DEFAULT, ResponseError } from '@fad-portal/ng-fad-privacy-notice';
 .
 .
 .
@@ -54,7 +50,7 @@ Add the selector inside some component and configure the input parameters:
     [configuration]="configuration"
     [privacyNoticeHtml]="privacyNoticeHtml"
     [delay]="delay"
-    (onaccept)="onaccept()"
+    (oncomplete)="oncomplete()"
     (onerror)="onerror($event)">
   </ng-fad-privacy-notice-v1>
 ```
@@ -64,11 +60,15 @@ Add the selector inside some component and configure the input parameters:
 Listen to the events and execute methods:
 
 ``` ts
-  onerror(error) {
+  privacyNoticeHtml: string;
+  configuration: IPrivacyNoticeConfiguration;
+  delay: number;
+
+  onerror(error: ResponseError) {
     alert(JSON.stringify(error));
   }
 
-  onaccept() {
+  oncomplete() {
     alert('next step');
   }
 ```
@@ -76,20 +76,20 @@ Listen to the events and execute methods:
 
 # Inputs
 
-| Name              | Type    |  Required  | Default      | Description                                |
-| ----------------- | ------- | -----------| ------------ | ------------------------------------------ |
-| configuration     | object  |  false     |  {}          |  module data to be configured              |
-| privacyNoticeHtml | string  |  false     |  undefined   |  privacy notice template                   |
-| legend            | string  |  false     |  undefined   |  legend confirmation of the privacy notice |
-| delay             | numbre  |  false     |  2000        |  loader duration                           |
+| Name              | Type                        |  Required  | Default                | Description                                |
+| ----------------- | --------------------------- | ---------- | ---------------------- | ------------------------------------------ |
+| configuration     | IPrivacyNoticeConfiguration |  false     |  CONFIGURATION_DEFAULT |  module data to be configured              |
+| privacyNoticeHtml | string                      |  false     |  undefined             |  privacy notice template                   |
+| legend            | string                      |  false     |  undefined             |  legend confirmation of the privacy notice |
+| delay             | number                      |  false     |  2000                  |  loader duration                           |
 
 
 # Outputs
 
-| Name              | Return  | Description                                                    |
-| ----------------- | ------- | -------------------------------------------------------------- |
-| onerror           | object  | Is called when an error happens                                |
-| onaccept          | void    | Is called when the user finishes the process                   |
+| Name              | Return        | Description                                                    |
+| ----------------- | ------------- | -------------------------------------------------------------- |
+| onerror           | ResponseError | Is called when an error happens                                |
+| oncomplete        | void          | Is called when the user finishes the process                   |
 
 
 
@@ -106,7 +106,7 @@ Add the selector inside some component and configure the input parameters:
     [configuration]="configuration"
     [privacyNoticeHtml]="privacyNoticeHtml"
     [delay]="delay"
-    (onclose)="onclose()"
+    (oncomplete)="oncomplete()"
     (onerror)="onerror($event)">
   </ng-fad-privacy-notice-v2>
 ```
@@ -116,7 +116,11 @@ Add the selector inside some component and configure the input parameters:
 Listen to the events and execute methods:
 
 ``` ts
-  onerror(error) {
+  privacyNoticeHtml: string;
+  configuration: IPrivacyNoticeConfiguration;
+  delay: number;
+
+  onerror(error: ResponseError) {
     alert(JSON.stringify(error));
   }
 
@@ -128,16 +132,16 @@ Listen to the events and execute methods:
 
 # Inputs
 
-| Name              | Type    |  Required  | Default      | Description                                |
-| ----------------- | ------- | -----------| ------------ | ------------------------------------------ |
-| configuration     | object  |  false     |  {}          |  module data to be configured              |
-| privacyNoticeHtml | string  |  false     |  undefined   |  privacy notice template                   |
-| delay             | numbre  |  false     |  2000        |  loader duration                           |
+| Name              | Type                        |  Required  | Default                | Description                                |
+| ----------------- | --------------------------- | ---------- | ---------------------- | ------------------------------------------ |
+| configuration     | IPrivacyNoticeConfiguration |  false     |  CONFIGURATION_DEFAULT |  module data to be configured              |
+| privacyNoticeHtml | string                      |  false     |  undefined             |  privacy notice template                   |
+| delay             | number                      |  false     |  2000                  |  loader duration                           |
 
 
 # Outputs
 
-| Name              | Return  | Description                                                    |
-| ----------------- | ------- | -------------------------------------------------------------- |
-| onerror           | object  | Is called when an error happens                                |
-| onclose           | void    | Is called when the user finishes the process                   |
+| Name              | Return        | Description                                                    |
+| ----------------- | ------------- | -------------------------------------------------------------- |
+| onerror           | ResponseError | Is called when an error happens                                |
+| oncomplete        | void          | Is called when the user finishes the process                   |

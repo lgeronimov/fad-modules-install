@@ -80,14 +80,14 @@ onerror(error) {
 # Inputs
 
 
-| Name           | Required   | Default             |  Type             | Description                                            |
-| -----------    | ---------- | ------------------- | ----------------- | ------------------------------------------------------ |
-| configuration  |   false    |   null              | object            | Configuration module                                   |
-| credentials    |   true     |   undefined         | Credentials       | Route to license file and request api                  |
-| side           |   true     |   0                 | 0 or 1            | Side of image to capture, 0 - Front, 1 - Back          |
-| shotOne        |   false    |   undefined         | string            | Base 64 of first captured image                        |
-| idData         |   false    |   false             | boolean           | Add OCR to the final response                          |
-| idPhoto        |   false    |   false             | boolean           | Image of the face cutout, only works if idData is true |
+| Name           | Required   | Default                 |  Type                  | Description                                            |
+| -----------    | ---------- | ----------------------- | ---------------------- | ------------------------------------------------------ |
+| configuration  |   false    |   CONFIGURATION_DEFAULT | IRegulaIdConfiguration | Configuration module                                   |
+| credentials    |   true     |   undefined             | Credentials            | Route to license file and request api                  |
+| side           |   true     |   0                     | 0 | 1                  | Side of image to capture, 0 - Front, 1 - Back          |
+| shotOne        |   false    |   undefined             | string                 | Base 64 of first captured image                        |
+| idData         |   false    |   false                 | boolean                | Add OCR to the final response                          |
+| idPhoto        |   false    |   false                 | boolean                | Image of the face cutout, only works if idData is true |
 
 
 # Outputs

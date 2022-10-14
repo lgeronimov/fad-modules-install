@@ -6,9 +6,10 @@
 npm install @fad-producto/ng-fad-acceptance-signature-express
 ```
 
-## Dependencies
-
-Add the folder provided by the technical team within the project assets (images and js)
+## Update
+``` bash
+npm install @fad-producto/ng-fad-acceptance-signature-express@latest
+```
 
 ## Assets
 Add into the assets array (*angular.json*) the next lines:
@@ -32,7 +33,7 @@ In the file necessary *example.module.ts* import the module.
 In this case  *app.module.ts*
 
 ``` ts
-import { NgFadAcceptanceSignatureExpressModule } from '@fad-producto/ng-fad-acceptance-signature-express';
+import { NgFadAcceptanceSignatureExpressModule, IAcceptanceSignatureConfiguration, CONFIGURATION_DEFAULT, ResponseError, PdfPagesSignature } from '@fad-producto/ng-fad-acceptance-signature-express';
 .
 .
 .
@@ -58,9 +59,8 @@ Add the selector inside some component and configure the input parameters:
     [configuration]="configuration"
     [pdfSrc]="pdfSrc"
     [positionSignatures]="positionSignatures"
-    [pdfResources]="pdfResources"
     (onerror)="onerror($event)"
-    (onsigndocument)="onsigndocument()">
+    (oncomplete)="oncomplete()">
   </ng-fad-acceptance-signature-express>
 ```
 
@@ -70,15 +70,13 @@ Listen to the events and execute methods:
 
 ``` ts
   public configuration = {};
-  public onsigndocument = [];
   public pdfSrc = 'pdf resource';
-  public pdfResources = null;
 
-  onerror(error) {
+  onerror(error: ResponseError) {
     alert(JSON.stringify(error));
   }
 
-  onsigndocument() {
+  oncomplete() {
     alert('next step');
   }
 
@@ -87,17 +85,17 @@ Listen to the events and execute methods:
 
 # Inputs
 
-| Name                | Type    |  Required  | Default      | Description                         |
-| ------------------- | ------- | -----------| ------------ | ----------------------------------- |
-| configuration       | object  |  false     |  {}          |  module data to be configured       |
-| pdfSrc              | string  |  true      |  undefined   |  pdf resource                       |
-| positionSignatures  | object  |  true      |  undefined   |  signature coordinates              |
+| Name                | Type                              |  Required  | Default                | Description                         |
+| ------------------- | --------------------------------- | -----------| ---------------------- | ----------------------------------- |
+| configuration       | IAcceptanceSignatureConfiguration |  false     |  CONFIGURATION_DEFAULT |  module data to be configured       |
+| pdfSrc              | string                            |  true      |  undefined             |  pdf resource                       |
+| positionSignatures  | PdfPagesSignature[]               |  true      |  undefined             |  signature coordinates              |
 
 
 # Outputs
 
-| Name              | Return  | Description                                                    |
-| ----------------- | ------- | -------------------------------------------------------------- |
-| onerror           | object  | Is called when an error happens                                |
-| oncontinue        | void    | Is called when the user finishes the process                   |
+| Name              | Return        | Description                                                    |
+| ----------------- | ------------- | -------------------------------------------------------------- |
+| onerror           | ResponseError | Is called when an error happens                                |
+| oncomplete        | void          | Is called when the user finishes the process                   |
 

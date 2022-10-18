@@ -80,14 +80,15 @@ onerror(error) {
 # Inputs
 
 
-| Name           | Required   | Default                 |  Type                  | Description                                            |
-| -----------    | ---------- | ----------------------- | ---------------------- | ------------------------------------------------------ |
-| configuration  |   false    |   CONFIGURATION_DEFAULT | IRegulaIdConfiguration | Configuration module                                   |
-| credentials    |   true     |   undefined             | Credentials            | Route to license file and request api                  |
-| side           |   true     |   0                     | 0 | 1                  | Side of image to capture, 0 - Front, 1 - Back          |
-| shotOne        |   false    |   undefined             | string                 | Base 64 of first captured image                        |
-| idData         |   false    |   false                 | boolean                | Add OCR to the final response                          |
-| idPhoto        |   false    |   false                 | boolean                | Image of the face cutout, only works if idData is true |
+| Name           | Required   | Default                                  |  Type                  | Description                                            |
+| -----------    | ---------- | ---------------------------------------- | ---------------------- | ------------------------------------------------------ |
+| configuration  |   false    |   CONFIGURATION_DEFAULT                  | IRegulaIdConfiguration | Configuration module                                   |
+| credentials    |   true     |   undefined                              | Credentials            | Route to license file and request api                  |
+| side           |   true     |   0                                      | 0 | 1                  | Side of image to capture, 0 - Front, 1 - Back          |
+| shotOne        |   false    |   undefined                              | string                 | Base 64 of first captured image                        |
+| idData         |   false    |   false                                  | boolean                | Add OCR to the final response                          |
+| idPhoto        |   false    |   false                                  | boolean                | Image of the face cutout, only works if idData is true |
+| delay          |   false    |   3 (always greater than or equal to 3 ) | number                 | Waiting time regarding the visibility of the camera    |
 
 
 # Outputs
@@ -97,3 +98,5 @@ onerror(error) {
 | ----------- | --------------- | ------------------------------------------ |
 | oncomplete  | ResponseSuccess | Fires when the liveness ends successfully  |
 | onerror     | ResponseError   | Is called when an error happens            |
+| onclose     | void            | Fires when user closes the camera          |
+

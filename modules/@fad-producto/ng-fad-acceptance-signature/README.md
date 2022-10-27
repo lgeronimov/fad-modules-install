@@ -39,6 +39,8 @@ import { NgFadAcceptanceSignatureModule, IAcceptanceSignatureConfiguration, Resp
     ]...
 ```
 
+Note: BrowserAnimationsModule is required.
+
 # Usage
 
 ## HTML
@@ -51,7 +53,7 @@ Add the selector inside some component and configure the output events:
 <ng-fad-acceptance-signature
     [configuration]="configuration"
     [pdfSrc]="pdf"
-    [positionSignatures]="signatures"
+    [positionSignatures]="positionSignatures"
     [pdfResources]="pdfResources"
     (onerror)="onerror($event)"
     (onmoreinformation)="onmoreinformation()"

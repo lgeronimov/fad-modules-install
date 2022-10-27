@@ -6,9 +6,9 @@
 npm install @fad-producto/ng-fad-fingerprints
 ```
 
-## Dependencies
+## License
 
-Add the folder provided by the technical team within the project assets (images and js)
+Add the file provided by the technical team
 
 
 ## Configuration project
@@ -32,14 +32,14 @@ In angular.json file add identy assets and styles
       "output": "./assets/"
     },
     {
-        "glob": "**/*",
-        "input": "node_modules/@fad-producto/ng-fad-fingerprints/assets",
-        "output": "./assets/"
+      "glob": "**/*",
+      "input": "node_modules/@fad-producto/ng-fad-fingerprints/assets",
+      "output": "./assets/"
     }
 ],
 "styles": [
     "node_modules/@identy/identy-finger/dist/identy-finger-style.css",
-    "node_modules/@fad-produto/ng-fad-fingerprints/assets/fad-fingerprints.scss"
+    "node_modules/@fad-producto/ng-fad-fingerprints/assets/style/fad-fingerprints.scss"
 ],
 .
 .
@@ -90,7 +90,7 @@ Add the selector inside some component
     [captureTimeout]="captureTimeout"
     [allowClose]="allowClose"
     (onerror)="onerror($event)" 
-    (ondata)="ondata($event)"
+    (oncomplete)="oncomplete($event)"
     (onclose)="onclose()">
 </ng-fad-fingerprints>
 ```
@@ -98,7 +98,7 @@ Add the selector inside some component
 ## Typescript
 
 ```ts
-import { FingerDetectionMode, NgFadFingerprintsComponent, ResponseIdentyFinger } from 'ng-fad-fingerprints';
+import { NgFadFingerprintsComponent, CONFIGURATION_DEFAULT, FingerDetectionMode, IFingerprintsConfiguration, ResponseError, ResponseSuccess } from '@fad-producto/ng-fad-fingerprints';
 .
 .
 .
@@ -113,7 +113,7 @@ onerror(error: ResponseError) {
   // manage error
 }
 
-ondata(event: ResponseIdentyFinger) {
+oncomplete(event: ResponseIdentyFinger) {
    // capture result
 }
 
@@ -124,13 +124,14 @@ onclose() {
 
 # Inputs
 
-| Name                  | Type                  |  Required  | Default   | Description                                                |
-| --------------------- | --------------------- | ---------- |---------  | ---------------------------------------------------------- |
-| modelURL              | string                |  true      | undefined | Server url                                                 |
-| detectionModes        | FingerDetectionMode[] |  true      | undefined | Hand (right or left) and fingers (4F or thumb) to capture  |
-| captureTimeout        | number                |  false     | 30000     | Set capture timeout                                        |
-| delay                 | number                |  false     | 5000      | Set init delay                                             |
-| allowClose            | boolean               |  false     | false     | Button that allows you to close the capture                |
+| Name                  | Type                       |  Required  | Default               | Description                                                |
+| --------------------- | -------------------------- | ---------- |---------------------- | ---------------------------------------------------------- |
+| configuration         | IFingerprintsConfiguration |  false     | CONFIGURATION_DEFAULT | Configuration module                                       |
+| modelURL              | string                     |  true      | undefined             | Server url                                                 |
+| detectionModes        | FingerDetectionMode[]      |  true      | undefined             | Hand (right or left) and fingers (4F or thumb) to capture  |
+| captureTimeout        | number                     |  false     | 30000                 | Set capture timeout                                        |
+| delay                 | number                     |  false     | 5000                  | Set init delay                                             |
+| allowClose            | boolean                    |  false     | false                 | Button that allows you to close the capture                |
 
 
 | FingerDetectionMode Type |
@@ -151,8 +152,8 @@ onclose() {
 
 # Outputs
 
-| Name           | Return                | Description                                    |
-| -------------- | --------------------- | ---------------------------------------------- |
-| ondata         | ResponseIdentyFinger  | Is called when capture completes successfully  |
-| onerror        | object                | Is called when an error happens                |
-| onclose        | void                  | Is called when user close component            |
+| Name           | Return          | Description                                    |
+| -------------- | --------------- | ---------------------------------------------- |
+| oncomplete     | ResponseSuccess | Is called when capture completes successfully  |
+| onerror        | ResponseError   | Is called when an error happens                |
+| onclose        | void            | Is called when user close component            |

@@ -113,7 +113,7 @@ onerror(error: ResponseError) {
   // manage error
 }
 
-oncomplete(event: ResponseIdentyFinger) {
+oncomplete(event: ResponseSuccess) {
    // capture result
 }
 

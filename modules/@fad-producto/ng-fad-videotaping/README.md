@@ -45,7 +45,7 @@ In the file necessary *example.module.ts* import the module.
 In this case  *app.module.ts*
 
 ``` ts
-import { Configuration, CONFIGURATION_DEFAULT, ErrorCode, Identification, IDS_ALLOWED, ResponseError, ResponseSuccess } from '@fad-producto/ng-fad-videotaping';
+import { NgFadVideotapingModule } from '@fad-producto/ng-fad-videotaping';
 .
 .
 .
@@ -82,13 +82,13 @@ Add the selector inside some component and configure the input parameters:
 Listen to the events:
 
 ``` ts
-
+import { IVideotapingConfiguration, CONFIGURATION_DEFAULT, ErrorCode, Identification, IDS_ALLOWED, ResponseError, ResponseSuccess } from '@fad-producto/ng-fad-videotaping';
   public legend = 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto  de relleno estándar de las industrias desde el año 1500';
 
   public identifications: Identification[] = [{ name: IDS_ALLOWED.ID_MEX_FRONT, title: 'Front' }, { name: IDS_ALLOWED.ID_MEX_BACK, title: 'Back' }];
 
   // optional
-  public configuration = {
+  public configuration: IVideotapingConfiguration = {
     idDetection: {
       captureId: true,
       probability: 0.85
@@ -100,7 +100,13 @@ Listen to the events:
       captureSelfie: true,
       imageType: 'image/png',
       imageQuality: 1
-    }
+    },
+    selfieId: {
+      captureSelfieId: false,
+      imageType: 'image/png',
+      imageQuality: 1,
+      captureTimeout: 100
+    },
   };
 
   oncomplete(response: ResponseSuccess) {
@@ -116,6 +122,10 @@ Listen to the events:
     console.log('camera accepted');
   }
 
+  onclose(){
+    console.log('module closed');
+  }
+
 ```
 
 
@@ -125,7 +135,7 @@ Listen to the events:
 | ----------------- | ---------------- | ---------- | --------------------------------------------------- | -------------------------------------------------- |
 | legend            | string           |  true      |  null                                               |  Legend to repeat in the recording                 |
 | identifications   | Identification[] |  false     | [{name: IDS_ALLOWED.ID_MEX_FRONT, title: 'Anverso'} |  Identifications to detect (only from IDS_ALLOWED) |
-| configuration     | Configuration    |  false     | CONFIGURATION_DEFAULT                               |  Module data to be configured                      |
+| configuration     | IVideotapingConfiguration    |  false     | MEDIA_CONFIGURATION_MOBILE, CONFIGURATION_DEFAULT                               |  Module data to be configured                      |
 
 
 
@@ -136,5 +146,7 @@ Listen to the events:
 | oncomplete   | ResponseSuccess | Fires when the process completes successfully      |
 | acceptCamera | void            | Fires when the user accepts the camera permissions |
 | onerror      | ResponseError   | Is called when an error happens                    |
+| onclose      | void   | Fires when the user intentionally closes the module     |
+
 
 

@@ -92,14 +92,14 @@ Add the selector inside some component
 ## Typescript
 
 ```ts
-import { NgFadFingerprintsComponent, CONFIGURATION_DEFAULT, FINGERS, IFingerprintsConfiguration, ResponseError, ResponseSuccess, WEB_ASSEMBLY_BACKEND } from '@fad-producto/ng-fad-identy-fingerprints';
+import { NgFadFingerprintsComponent, CONFIGURATION_DEFAULT, FINGERS_DETECTION_MODE, IFingerprintsConfiguration, ResponseError, ResponseSuccess, WEB_ASSEMBLY_BACKEND } from '@fad-producto/ng-fad-identy-fingerprints';
 .
 .
 .
 
 modelURL: string = 'yor_model_url';
 captureTimeout = 30000;
-detectionModes: FINGERS[] = [FINGERS.L4F];
+detectionModes: FINGERS_DETECTION_MODE[] = [FINGERS_DETECTION_MODE.L4F];
 
 onerror(error: ResponseError) {
   // manage error
@@ -120,7 +120,7 @@ onclose() {
 | --------------------- | -------------------------- | ---------- |---------------------- | ---------------------------------------------------------- |
 | configuration         | IFingerprintsConfiguration |  false     | CONFIGURATION_DEFAULT | Configuration module                                       |
 | modelURL              | string                     |  true      | undefined             | Server url                                                 |
-| detectionModes        | FINGERS[]                  |  true      | undefined             | Hand (right or left) and fingers (4F or thumb) to capture  |
+| detectionModes        | FINGERS_DETECTION_MODE[]   |  true      | undefined             | Hand (right or left) and fingers (4F or thumb) to capture  |
 | captureTimeout        | number                     |  false     | 60000                 | Set capture timeout                                        |
 
 ## IFingerprintsConfiguration

@@ -13,20 +13,20 @@ npm install @fad-producto/fad-services@latest
 
 # Usage
 
-By default, all the request uses the UAT environments. For send the request to a different environment (uath, production, onpremise) put the specific base-url through the options paramenter
+By default, all the request uses the UAT environments. For send the request to a different environment (uat, uatha, production) set the specific environment through the options paramenter
 
 ## Authorization server
 ### Authentication / Authorization (Login)
 
 ``` ts
-import {loginWithPassword} from '@fad-producto/fad-services';
+import {login} from '@fad-producto/fad-services';
 
 const USER = {
 	username: 'username', 
 	password: 'sha256-password'
 }
 
-const token = await loginWithPassword(USER, options);
+const token = await login(USER, options);
 ```
 
 > For more details check the function definition
@@ -56,7 +56,7 @@ const middlewareResponse: MiddlewareResponse<T> = await getThirdPartyInfo<T>(
 ### Facetec credentials
 
 ``` ts
-import {getFacetecCredentials, AdditionaInfoProcessType, MiddlewarePlatform} from '@fad-producto/fad-services';
+import {getFacetecCredentials, AdditionaInfoProcessType, MiddlewarePlatform, Environment} from '@fad-producto/fad-services';
 
 const facetecCredentials = await getFacetecCredentials(
 	'fadweb', 
@@ -71,10 +71,17 @@ const facetecCredentials = await getFacetecCredentials(
 		//	password: 'sha256-password'
 		// }
 	}, 
-	options
+	{ 
+		environment: Environment.UAT
+	}
 );
 ```
 
 > For more details check the function definition
 > FadCredentials can be the token string or an user-password pair 
 
+---
+### RequestOptions
+
+All the funcions contains an options parameter with custom values that will be used in the request. These options are described below.
+- environment: An environment constant to determine which urls will be used in all the internal requests of a function.

@@ -94,6 +94,10 @@ onerror(error) {
    alert(JSON.stringify(error));
 }
 
+onclose() {
+  // remove module component from your component
+}
+
 ```
 
 
@@ -109,12 +113,9 @@ onerror(error) {
 | shotOne        |   false    |  undefined                              | string                 | Base 64 of first captured image                        |
 | idData         |   false    |  false                                  | boolean                | Add OCR to the final response                          |
 | idPhoto        |   false    |  false                                  | boolean                | Image of the face cutout, only works if idData is true |
-| delay          |   false    |  3 (always greater than or equal to 3 ) | number                 | Waiting time regarding the visibility of the camera    |
-| allowClose     |   false    |  true                                   | boolean                | Shows a button to close camera                         |
 
 
 # Outputs
-
 
 | Name        | Return          | Description                                |
 | ----------- | --------------- | ------------------------------------------ |

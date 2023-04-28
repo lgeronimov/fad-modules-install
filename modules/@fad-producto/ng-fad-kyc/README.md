@@ -25,7 +25,7 @@ import { NgFadKYCModule } from '@fad-producto/ng-fad-kyc';
 ... imports: [
        ...,
        BrowserAnimationsModule 
-       NgFadRegulaIdModule
+       NgFadKYCModule
     ]...
 ```
 

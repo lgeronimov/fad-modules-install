@@ -76,7 +76,7 @@ Add the selector inside some component and configure the output events:
 Listen to the events:
 
 ``` ts
-import { Credentials, IRegulaIdConfiguration, ResponseError, ResponseSuccess } from 'projects/ng-fad-regula-id/src/public-api';
+import { Credentials, IRegulaIdConfiguration, ResponseError, ResponseSuccess } from '@fad-producto/ng-fad-regula-id';
 .
 .
 .

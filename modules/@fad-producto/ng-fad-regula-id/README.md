@@ -39,7 +39,7 @@ In the file necessary *example.module.ts* import the module.
 In this case  *app.module.ts*
 
 ``` ts
-import { Configuration, CONFIGURATION_DEFAULT, Credentials, ErrorCode, ResponseError, ResponseSuccess, NgFadRegulaIdModule } from '@fad-producto/ng-fad-regula-id';
+import { NgFadRegulaIdModule } from '@fad-producto/ng-fad-regula-id';
 .
 .
 .
@@ -60,6 +60,7 @@ Add the selector inside some component and configure the output events:
 
 ``` html
 <ng-fad-regula-id
+  [configuration]="configuration"
   [credentials]="credentials"
   [side]="side"
   [shotOne]="shotOne"
@@ -75,6 +76,11 @@ Add the selector inside some component and configure the output events:
 Listen to the events:
 
 ``` ts
+import { Credentials, IRegulaIdConfiguration, ResponseError, ResponseSuccess } from '@fad-producto/ng-fad-regula-id';
+.
+.
+.
+public configuration: IRegulaIdConfiguration;
 
 public credentials: Credentials = {
     license: 'assets/third-party/regula/regula.license',
@@ -90,7 +96,7 @@ oncomplete(result: ResponseSuccess) {
   console.log(result)
 }
 
-onerror(error) {
+onerror(error: ResponseError) {
    alert(JSON.stringify(error));
 }
 
@@ -99,8 +105,6 @@ onclose() {
 }
 
 ```
-
-
 
 # Inputs
 
@@ -113,6 +117,16 @@ onclose() {
 | shotOne        |   false    |  undefined                              | string                 | Base 64 of first captured image                        |
 | idData         |   false    |  false                                  | boolean                | Add OCR to the final response                          |
 | idPhoto        |   false    |  false                                  | boolean                | Image of the face cutout, only works if idData is true |
+
+
+## IRegulaIdConfiguration
+
+
+The following properties are for a more specific configuration of the module
+
+| Name                | Type                       |  Required  | Default                   | Description                                                |
+| ------------------- | -------------------------- | ---------- |-------------------------- | ---------------------------------------------------------- |
+| allowClose          | boolean                    |  false     | false                     | allows closing of the capture component                    |
 
 
 # Outputs

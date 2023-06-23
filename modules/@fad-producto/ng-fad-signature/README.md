@@ -45,7 +45,7 @@ In the file necessary *example.module.ts* import the module.
 In this case  *app.module.ts*
 
 ``` ts
-import { Configuration, ResponseError, ResponseSuccess, ErrorCode, CONFIGURATION_DEFAULT } from '@fad-producto/ng-fad-signature';
+import { ISignatureConfiguration, ResponseError, ResponseSuccess, ErrorCode, CONFIGURATION_DEFAULT, NgFadSignatureModule } from '@fad-producto/ng-fad-signature';
 .
 .
 .
@@ -81,7 +81,7 @@ Add the selector inside some component and configure the output events:
 Listen to the events:
 
 ``` ts
-  const configuration: Configuration = {
+  const configuration: ISignatureConfiguration = {
     faceDetection: {
       faceRequired: true
     },
@@ -104,7 +104,11 @@ Listen to the events:
     console.log(error);
     // if (error.code === ErrorCode.BROWSER_NOT_SUPPORTED) // do something
   }
-  
+
+  onclose() {
+    console.log('onclose');
+  }
+
   acceptCamera() {
     console.log('camera accepted');
   }
@@ -115,7 +119,7 @@ Listen to the events:
 
 | Name           | Type           |  Required  | Default               | Description                          |
 | -------------- | -------------- | ---------- | --------------------- | ------------------------------------ |
-| configuration  | Configuration  |  false     | CONFIGURATION_DEFAULT |  Module data to be configured        |
+| configuration  | ISignatureConfiguration  |  false     |  MEDIA_CONFIGURATION_MOBILE, CONFIGURATION_DEFAULT      |   Customizable properties like colors, legends and video/recorder configuration      |
 
 
 # Outputs
@@ -124,4 +128,5 @@ Listen to the events:
 | ------------ | --------------- | -------------------------------------------------- |
 | oncomplete   | ResponseSuccess | Fires when the process completes successfully      |
 | acceptCamera | void            | Fires when the user accepts the camera permissions |
+| onclose | void            | Fires when the user close the module |
 | onerror      | ResponseError   | Is called when an error happens                    |

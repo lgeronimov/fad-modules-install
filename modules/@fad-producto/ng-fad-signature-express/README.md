@@ -71,7 +71,7 @@ Add the selector inside some component and configure the output events:
 
 ``` html
 <ng-fad-signature-express
-  (configuration)="configuration"
+  [configuration]="configuration"
   (onerror)="onerror($event)"
   (oncomplete)="oncomplete($event)"
   (acceptCamera)="acceptCamera()">
@@ -84,13 +84,13 @@ Listen to the events:
 
 ``` ts
 
-import { Configuration, ResponseSuccess, ResponseError, ErrorCode, CONFIGURATION_DEFAULT } from '@fad-producto/ng-fad-signature-express';
+import { ISignatureExpressConfiguration, ResponseSuccess, ResponseError, ErrorCode, CONFIGURATION_DEFAULT } from '@fad-producto/ng-fad-signature-express';
 
 .
 .
 .
 
-configuration: Configuration = {
+configuration: ISignatureExpressConfiguration = {
   selfie: {
     captureSelfie: true,
     imageType: 'image/png',
@@ -119,7 +119,7 @@ acceptCamera() {
 
 | Name             | Type           |  Required  | Default               | Description                   |
 | ---------------- | ------------   | ---------- | --------------------- | ----------------------------- |
-| configuration    | Configuration  |  false     | CONFIGURATION_DEFAULT | Module data to be configured  |
+| configuration    | ISignatureExpressConfiguration  |  false     | MEDIA_CONFIGURATION_MOBILE, CONFIGURATION_DEFAULT | Module data to be configured  |
 
 
 # Outputs

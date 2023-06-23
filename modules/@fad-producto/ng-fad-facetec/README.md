@@ -42,12 +42,12 @@ Add into the assets array (*angular.json*) the next lines:
 
 ## Import
 
-In the file necessary *example.module.ts* import the module.
+In the file **necessary** *example.module.ts* import the module.
 
 In this case  *app.module.ts*
 
 ``` ts
-import { Configuration, ResponseError, ResponseSuccess, ErrorCode, CONFIGURATION_DEFAULT, Credentials, NgFadFacetecModule } from '@fad-producto/ng-fad-facetec';
+import { NgFadFacetecModule } from '@fad-producto/ng-fad-facetec';
 .
 .
 .
@@ -80,9 +80,10 @@ Add the selector inside some component and configure the output events:
 Listen to the events:
 
 ``` ts
-
+import { IFacetecConfiguration, ResponseError, ResponseSuccess, ErrorCode, CONFIGURATION_DEFAULT, Credentials} from '@fad-producto/ng-fad-facetec';
 const CREDENTIALS: Credentials = {
   deviceKeyIdentifier: 'XXXXXXXXXXXXXXXXXX',
+  baseURL: 'https://someurl.com',
   publicFaceScanEncryptionKey: '-----BEGIN PUBLIC KEY-----\n' +
     'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX' +
     'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX' +
@@ -110,17 +111,18 @@ onerror(error: ResponseError) {
 # Inputs
 
 
-| Name           | Type             | Required   | Default             |   Description                                            |
-| -----------    | ---------- | ------------------- | ----------------- | ------------------------------------------------------ |
-| credentials    |  Credentials       | true     |   null              |  Credentials required for facetec to work               |
-| configuration  | Configuration |false  |  CONFIGURATION_DEFAULT     |   Module data to be configured        |
+| Name           | Type             | Required   | Default             |   Description                                                                                              |
+| -----------    | ---------- | ------------------- | ---------------- | --------------------------------------------------------------------------------------------------------  |
+| credentials    |  Credentials       | true     |   null              |  Credentials required for facetec to work                                                                  |
+| useMiddleware  |  boolean           | false    |   false             |  Flag to activate the parameters needed to use the FAD middleware                                          |
+| configuration  | IFacetecConfiguration |false  |  FAD_CUSTOMIZATION, MODULE_CUSTOMIZATION, CONFIGURATION_DEFAULT      |   Customizable properties like colors and legends         |
 
 
 
 # Outputs
 
 
-| Name        | Return           | Description                                |
+| Name        | **Return**           | Description                                |
 | ----------- | ---------------- | ------------------------------------------ |
 | oncomplete  | ResponseSuccess  | Fires when the liveness ends successfully  |
 | onerror     | ResponseError     | Is called when an error happens            |

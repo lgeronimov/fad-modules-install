@@ -47,7 +47,7 @@ In the file necessary *example.module.ts* import the module.
 In this case  *app.module.ts*
 
 ``` ts
-import { Configuration, ResponseError, ErrorCode, CONFIGURATION_DEFAULT, NgFadVideoPreviewModule } from '@fad-producto/ng-fad-video-preview';
+import { NgFadVideoPreviewModule } from '@fad-producto/ng-fad-video-preview';
 
 .
 .
@@ -87,22 +87,22 @@ Add the selector inside some component and configure the output events:
 Listen to the events:
 
 ``` ts
-
-title = 'FAD-VIDEO-PREVIEW';
+import { IVideoPreviewConfiguration, ResponseError, ErrorCode, CONFIGURATION_DEFAULT } from '@fad-producto/ng-fad-video-preview';
 .
 .
 .
-onerror(error) {
-  alert(JSON.stringify(error));
+onplay() {
+  console.log('Playing')
 }
 
 oncancel() {
   alert('retry');
 }
+
 onerror(error: ResponseError) {
-    console.log(error);
-    // if (error.code === ErrorCode.NO_VIDEO) // do something
-  }
+  console.log(error);
+  // if (error.code === ErrorCode.NO_VIDEO) // do something
+}
 
 onconfirm() {
   alert('confirm');
@@ -116,7 +116,7 @@ onconfirm() {
 | ---------------- | ------------   | ---------- | --------------------- | ----------------------------- |
 | blobFace    | Blob  |  true     | null | Face video as a  Blob  |
 | blobSignature    | Blob  |  false     | null | Signature video as a  Blob |
-|configuration | Configuration  | false  | CONFIGURATION_DEFAULT | Module data to be configured |
+|configuration | IVideoPreviewConfiguration  | false  | FAD_CUSTOMIZATION, MODULE_CUSTOMIZATION, CONFIGURATION_DEFAULT | Module data to be configured |
 
 # Outputs
 

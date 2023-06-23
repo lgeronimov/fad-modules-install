@@ -45,7 +45,7 @@ In the file necessary *example.module.ts* import the module.
 In this case  *app.module.ts*
 
 ``` ts
-import { Configuration, ResponseError, ResponseSuccess, ErrorCode, CONFIGURATION_DEFAULT } from '@fad-producto/ng-fad-videoagreement';
+import { NgFadVideoagreementModule } from '@fad-producto/ng-fad-videoagreement';
 .
 .
 .
@@ -72,7 +72,8 @@ Add the selector inside some component and configure the input parameters:
   [configuration]="configuration"
   (onerror)="onerror($event)"
   (acceptCamera)="acceptCamera()"
-  (oncomplete)="oncomplete($event)">
+  (oncomplete)="oncomplete($event)"
+  (onclose)="onclose()">
 </ng-fad-videoagreement>
 ```
 
@@ -81,9 +82,11 @@ Add the selector inside some component and configure the input parameters:
 Listen to the events:
 
 ``` ts
+import { IVideoagreementConfiguration, ResponseError, ResponseSuccess, ErrorCode, CONFIGURATION_DEFAULT } from '@fad-producto/ng-fad-videoagreement';
+
   public legend = 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto  de relleno estándar de las industrias desde el año 1500';
 
-  const configuration: Configuration = {
+  const configuration: IVideoagreementConfiguration = {
     faceDetection: {
       faceRequired: true
     },
@@ -111,6 +114,10 @@ Listen to the events:
     console.log('camera accepted');
   }
 
+  onclose(){
+    console.log('module closed');
+  }
+
 ```
 
 
@@ -120,7 +127,7 @@ Listen to the events:
 | Name           | Type           |  Required  | Default               | Description                          |
 | -------------- | -------------- | ---------- | --------------------- | ------------------------------------ |
 | legend         | string         |  true      |  null                 |  Legend to repeat in the recording   |
-| configuration  | Configuration  |  false     | CONFIGURATION_DEFAULT |  Module data to be configured        |
+| configuration  | IVideoagreementConfiguration  |  false     | MEDIA_CONFIGURATION_MOBILE, CONFIGURATION_DEFAULT      |   Customizable properties like colors, legends and video/recorder configuration      |
 
 
 # Outputs
@@ -130,4 +137,5 @@ Listen to the events:
 | oncomplete   | ResponseSuccess | Fires when the process completes successfully      |
 | acceptCamera | void            | Fires when the user accepts the camera permissions |
 | onerror      | ResponseError   | Is called when an error happens                    |
+| onclose      | void   | Fires when the user intentionally closes the module     |
 

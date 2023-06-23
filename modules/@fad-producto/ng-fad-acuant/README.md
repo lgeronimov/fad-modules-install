@@ -45,7 +45,7 @@ In the file necessary *example.module.ts* import the module.
 In this case  *app.module.ts*
 
 ``` ts
-import { Configuration, AcuantCredentials, ResponseError, AcuantResult, ErrorCode, CONFIGURATION_DEFAULT, NgFadAcuantModule } from '@fad-producto/ng-fad-acuant';
+import { IAcuantConfiguration, AcuantCredentials, ResponseError, AcuantResult, ErrorCode, CONFIGURATION_DEFAULT, NgFadAcuantModule } from '@fad-producto/ng-fad-acuant';
 .
 .
 .
@@ -73,6 +73,7 @@ Add the selector inside some component and configure the output events:
   [idPhoto]=false
   [forcePhoto]= false
   [imageQuality]= 1
+  [manualCapture]=false
   [documentInstance]="documentInstance"
   (onerror)="onerror($event)"
   (oncomplete)="oncomplete($event)">
@@ -97,7 +98,7 @@ const CREDENTIALS : AcuantCredentials  = {
 
 
 
-public configuration: Configuration = {
+public configuration: IAcuantConfiguration = {
   customization: {
     moduleCustomization: {
       legends: {
@@ -146,6 +147,7 @@ onerror(error: ResponseError) {
 | imageQuality      |    number (0.1 to 1) | false      |   1                 | Quality of the image result                                                        |
 | forcePhoto        |    boolean           | false      |   false             | Returns the ID photo if the OCR is not required or if could not obtain the ID face crop                                                                                   |
 | documentInstance  |    string            | false      |   null              |      Is used to relate the front and back of the ID                                                                              |
+|manualCapture | boolean  | false | false | Enables the manual capture by default |
 
 
 # Outputs

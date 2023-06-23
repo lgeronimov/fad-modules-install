@@ -140,7 +140,7 @@ onerror(error: ResponseError) {
 | Name              |   Type               | Required   | Default             | Description                                                                        |
 | -----------       |  -----------------   | ---------- | ------------------- | ------------------------------------------------------                             |
 | credentials       |    AcuantCredentials | true       |   null              | Credentials required for acuant to work                                            |
-| configuration     |    Configuration     | false      |   object            | configuration of legends                                                           |
+| configuration     |    IAcuantConfiguration     | false      |   object            | configuration of legends                                                           |
 | side              |    number  (0 or 1)  | false      |   0                 | Side of image to capture <ul> <li> 0 - Front </li><li> 1 - Back</li>    </ul>      |
 | idData            |    boolean           | false      |   false             | add OCR and OCR validation to the final response                                   |
 | idPhoto           |    boolean           | false      |   false             | Image of the face cutout, only works if idData is true                             |

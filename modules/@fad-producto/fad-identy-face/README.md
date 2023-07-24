@@ -6,6 +6,12 @@
 npm install @fad-producto/ng-fad-identy-face
 ```
 
+### NOTE: For installations after Angular 9
+
+```
+npm install @fad-producto/ng-fad-identy-face --legacy-peer-deps
+```
+
 ## Configuration project
 
 In angular.json file add assets and styles

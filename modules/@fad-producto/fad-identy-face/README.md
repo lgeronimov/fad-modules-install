@@ -57,7 +57,7 @@ Add the selector inside some component
 
 ``` html
 <ng-fad-identy-face
-  [modelURL]="modelURL"
+  [credentials]="credentials"
   (oncomplete)="oncomplete($event)"
   (onerror)="onerror($event)">
 </ng-fad-identy-face>
@@ -71,7 +71,7 @@ import { CONFIGURATION_DEFAULT, Credentials, IdentyDevice, IIdentyFaceConfigurat
 .
 @ViewChild(NgFadIdentyFaceComponent) component: NgFadIdentyFaceComponent;
 configuration: IIdentyFaceConfiguration;
-modelURL: Credentials = {
+credentials: Credentials = {
   modelUrl: 'your_model_url'
 }
 

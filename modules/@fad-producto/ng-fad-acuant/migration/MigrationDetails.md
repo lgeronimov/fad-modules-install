@@ -1,4 +1,306 @@
 # FAD-ACUANT Migration Details (CHANGELOG)
+
+
+## [10.0.3](https://na-at.xp-dev.com/git/FAD-ACUANT/compare/v10.0.2...v10.0.3) (2023-07-27)
+
+
+### Bug Fixes
+
+* using minified js files for acuant v11.9.0 ([f1beb5d](https://na-at.xp-dev.com/git/FAD-ACUANT/commit/f1beb5d7d41d6908ed58bed54a3e26b18c7fe038))
+
+## [10.0.2](https://na-at.xp-dev.com/git/FAD-ACUANT/compare/v10.0.1...v10.0.2) (2023-07-27)
+
+
+### Bug Fixes
+
+* focus for iframe version with Acuant 11.9.0
+## [10.0.1](https://na-at.xp-dev.com/git/FAD-ACUANT/compare/v10.0.0...v10.0.1) (2023-07-25)
+
+### Changes
+* Priority for the id verifications
+## [10.0.0](https://na-at.xp-dev.com/git/FAD-ACUANT/compare/v9.0.0...v10.0.0) (2023-07-24)
+
+
+### ⚠ BREAKING CHANGES
+
+* cardtype property inside AcuantResultImage changes to cardType
+
+> The cardtype attribute of `AcuantResultImage` interface changes to cardType
+> ``` ts
+> AcuantResultImage {
+>  image: {
+>    data: string;
+>    width: number;
+>    height: number;
+>  };
+>  glare: string;
+>  dpi: string;
+>  cardType: AcuantCardType;
+>  sharpness: number;
+>  moire: string;
+>  moireraw: string;
+> };
+> ``` 
+> 
+> For more details check the `AcuantResultImage` interface and the `AcuantCardType` enum
+
+### Features
+
+* Military and Consular classification types ([dfb663a](https://na-at.xp-dev.com/git/FAD-ACUANT/commit/dfb663ae8096238f3b7b4edc7f8907dbecd12588))
+
+
+### Bug Fixes
+
+* cardtype changes to cardType ([8b149b9](https://na-at.xp-dev.com/git/FAD-ACUANT/commit/8b149b95e1bd87083301bb4ff30d756a0af7e1a3))
+
+## [9.0.0](https://na-at.xp-dev.com/git/FAD-ACUANT/compare/v8.0.0...v9.0.0) (2023-07-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* check that the zones of the IDs are equals now is available through the checkZone flag
+* Thresholds must be configured through the new configuration object metricsThresholds
+> The metrics thresholds must be configured trough the new metricsThresholds property
+> ``` ts
+> configuration: IAcuantConfiguration = {
+>    metricsThresholds: {
+>    sharpness: 60,
+>    glare: 90,
+>    dpi: 350
+>  }
+> }
+
+### Features
+
+* checkCardType ([82b7700](https://na-at.xp-dev.com/git/FAD-ACUANT/commit/82b7700954f5d1092f15c893b718ab1c79500886))
+
+
+* metric thresholds object ([3e2113e](https://na-at.xp-dev.com/git/FAD-ACUANT/commit/3e2113e34dd32192445b87d77843119f934b393e))
+* sameZone changes to checkZone ([0cb6e4f](https://na-at.xp-dev.com/git/FAD-ACUANT/commit/0cb6e4f96acaf33d81962ff9702815f76115b0a7))
+
+## [8.0.0](https://na-at.xp-dev.com/git/FAD-ACUANT/compare/v7.0.0...v8.0.0) (2023-07-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* glare and dpi properties changes from string to number
+
+> The glare and dpi attributes of `AcuantResultImage` interface changes from string to number
+> ``` ts
+> AcuantResultImage {
+>  image: {
+>    data: string;
+>    width: number;
+>    height: number;
+>  };
+>  glare: number;
+>  dpi: number;
+>  cardtype: AcuantCardType;
+>  sharpness: number;
+>  moire: string;
+>  moireraw: string;
+> };
+> ``` 
+> 
+> For more details check the `AcuantResultImage` interface and the `AcuantCardType` enum
+### Features
+
+* glare threashold and dpi threashold ([63dd0b3](https://na-at.xp-dev.com/git/FAD-ACUANT/commit/63dd0b3742b436f53587241c7b4d5f5670086bd1))
+
+
+* glare and dpi types ([c35dd1b](https://na-at.xp-dev.com/git/FAD-ACUANT/commit/c35dd1b8ffb230934c2c1416ac71b712a1a54b0c))
+
+## [7.0.0](https://na-at.xp-dev.com/git/FAD-ACUANT/compare/v6.1.0...v7.0.0) (2023-07-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* the quality of the output ID's images must be configured via the configuration object instead of an @Input
+  
+> The imageQuality @Input is replaced by the `imageResult.quality` property
+> ``` ts
+> configuration: IAcuantConfiguration = {
+>    imageResult: {
+>      quality: 1
+>    },
+> }
+> ```
+
+### Features
+
+* idValidations property for check the sides and that the zones of the ID matches ([deee5ea](https://na-at.xp-dev.com/git/FAD-ACUANT/commit/deee5ead118730ff7bea3ecdc089a6ac14a72084))
+
+
+* image quality via configuration instead of [@input](https://na-at.xp-dev.com/input) ([f7f82e1](https://na-at.xp-dev.com/git/FAD-ACUANT/commit/f7f82e1ee55b24af941ccc2571d5f2165c88d778))
+
+## [6.1.0](https://na-at.xp-dev.com/git/FAD-ACUANT/compare/v6.0.0...v6.1.0) (2023-07-10)
+
+
+### Features
+
+* improves the focus in iPhone and android devices; inproves the support for  low-end devices ([9e46436](https://na-at.xp-dev.com/git/FAD-ACUANT/commit/9e46436d6d3ce33c28d188bc2f92209686e0c6fd))
+
+## [6.0.0](https://na-at.xp-dev.com/git/FAD-ACUANT/compare/v6.0.0-alpha.1...v6.0.0) (2023-07-07)
+
+
+### Features
+
+* imageQuality does not affect in the image upload process; instead only applies in the image response, after the image was uploaded to be processed in the server ([964574e](https://na-at.xp-dev.com/git/FAD-ACUANT/commit/964574e10550fac4e392b81af7d8a8d696751ca0))
+
+## [6.0.0-alpha.1](https://na-at.xp-dev.com/git/FAD-ACUANT/compare/v6.0.0-alpha.0...v6.0.0-alpha.1) (2023-06-12)
+
+
+### Bug Fixes
+
+* logs removed ([ce12a18](https://na-at.xp-dev.com/git/FAD-ACUANT/commit/ce12a18bc872baf978e1d064315933636bbf8fb8))
+
+## [6.0.0-alpha.0](https://na-at.xp-dev.com/git/FAD-ACUANT/compare/v5.1.0-alpha.0...v6.0.0-alpha.0) (2023-06-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* scan, manualCapture.mobile and manualCapture.desktop has legends for front and back side.
+> The customizable legeds of the module now has attributes for the front and the back side of the ID. Previous versions had no different attributes for the front and back side and the developer was the responsible of define the correct legends according
+> to the process.
+> ``` ts
+> IAcuantLegends {
+>   scan: {
+>     front: {
+>       none: 'ENFOCA EL FRENTE DE TU ID SOBRE LA GUÍA',
+>       smallDocument: 'ACERCATE MÁS',
+>       bigDocument: 'DEMASIADO CERCA',
+>       goodDocument: null,
+>       capturing: 'CAPTURANDO',
+>       tapToCapture: 'TOCA LA PANTALLA PARA CAPTURAR',
+>       title: 'Frente'
+>      },
+>      back: {
+>         none: 'ENFOCA EL REVERSO DE TU ID SOBRE LA GUÍA',
+>         smallDocument: 'ACERCATE MÁS',
+>         bigDocument: 'DEMASIADO CERCA',
+>         goodDocument: null,
+>         capturing: 'CAPTURANDO',
+>         tapToCapture: 'TOCA LA PANTALLA PARA CAPTURAR',
+>         title: 'Reverso'
+>       }
+>    },
+>    manualCapture: {
+>     tooltip: 'Captura nuevamente',
+>     mobile: {
+>       front: {
+>         instruction: 'Captura el frente de tu identificación',
+>         buttonNext: 'Continuar',
+>       },
+>       back: {
+>         instruction: 'Captura el reverso de tu identificación',
+>         buttonNext: 'Continuar',
+>       }
+>     },
+>     desktop: {
+>       front: {
+>         instruction: 'Sube el frente de tu identificación',
+>         title: 'Frente'
+>       },
+>       back: {
+>         title: 'Reverso',
+>         instruction: 'Sube el reverso de tu identificación',
+>       }
+>     }
+>   },
+> };
+> ``` 
+> 
+> For more details check the `IAcuantLegends` interface
+
+* The id attribute of the AcuantResponse interface is of type AcuantResultIdImage  (contains front and back image) insteead of AcuantResultImage
+> The AcuantResult now contains the image of the front and the back side of the ID. In previous versions the id attibute was of type `AcuantResultImage` and had only the image of one side of the id.
+> ``` ts
+> AcuantResult {
+>  id: {
+>    front?: AcuantResultImage;
+>    back?: AcuantResultImage;
+>  };
+>  idData?: AcuantResultIdData;
+>  idPhoto?: string;
+> };
+> ``` 
+> 
+> For more details check the `AcuantResult` and the `AcuantResultIdImage` interface
+
+* cardtype property changes from string type to AcuantCardType enum type
+
+> The cardtype attribute of `AcuantResultImage` interface changes from string to a new enum `AcuantCardType` enum
+> ``` ts
+> AcuantResultImage {
+>  image: {
+>    data: string;
+>    width: number;
+>    height: number;
+>  };
+>  glare: string;
+>  dpi: string;
+>  cardtype: AcuantCardType;
+>  sharpness: number;
+>  moire: string;
+>  moireraw: string;
+> };
+> ``` 
+> 
+> For more details check the `AcuantResultImage` interface and the `AcuantCardType` enum
+* sedDynamicConfiguration() and setCustomizationStyle() is not more available outside of the component
+* initDone() is not more available outside of the component
+* startCamera() is not more available outside of the component
+* createInstance() is not more available outside of the component
+* uploadImage() is not more available outside of the component
+* getOcr() is not more available outside of the component
+* getFaceImage() is not more available outside of the component
+* documentInstance and side removed as ng-fad-acuant input
+
+### Features
+
+* AcuantBiographic in AcuantDocument ([3bad06b](https://na-at.xp-dev.com/git/FAD-ACUANT/commit/3bad06ba485a2f0a6c22369e5c27f096077d3f16))
+* AcuantCardType enum ([f7ee483](https://na-at.xp-dev.com/git/FAD-ACUANT/commit/f7ee483df40318ae4b677d8ba38007e023df0928))
+* automatic capture title ([c577d6c](https://na-at.xp-dev.com/git/FAD-ACUANT/commit/c577d6c4b6188b9f8614651c84026c9fc0328f03))
+* cardType in AcuantResult ([b4a5477](https://na-at.xp-dev.com/git/FAD-ACUANT/commit/b4a54771fe6b2771e81c776c1ee9f6a78b9769d2))
+* customizable legends by side. ([884950f](https://na-at.xp-dev.com/git/FAD-ACUANT/commit/884950f98f16c0c6937f79cc1d9b6a8a0efabb5e))
+* font and back image in the result ([f3819ab](https://na-at.xp-dev.com/git/FAD-ACUANT/commit/f3819abb13939e9cda02173ce90ec8c3c7595d06))
+
+
+### Bug Fixes
+
+* cardtype in AcuantResultImage changes the string type to AcuantCardType ([c481011](https://na-at.xp-dev.com/git/FAD-ACUANT/commit/c4810116e8a218e0cf011e19ece9400d733fe879))
+
+
+* createInstance() private and async ([f46ba6a](https://na-at.xp-dev.com/git/FAD-ACUANT/commit/f46ba6ae6bde042434d4f1836cb24c516170a5a8))
+* getFaceImage methos is private ([b8b151d](https://na-at.xp-dev.com/git/FAD-ACUANT/commit/b8b151d1b3d43c89ad8d1cd7733422421ec37ccc))
+* getOcr() private and async ([d89e26a](https://na-at.xp-dev.com/git/FAD-ACUANT/commit/d89e26a8f36fa70b4625a911c29916464e411179))
+* initDone() private and async ([e334c7b](https://na-at.xp-dev.com/git/FAD-ACUANT/commit/e334c7be18fe45a940609d7a7a8acc522b8c70ac))
+* manages documentInstance and side internally ([14b6e83](https://na-at.xp-dev.com/git/FAD-ACUANT/commit/14b6e83c6b095f8b2699afbfdb4415dd8e82db1f))
+* sedDynamicConfiguration() and setCustomizationStyle() private ([ad5e9a7](https://na-at.xp-dev.com/git/FAD-ACUANT/commit/ad5e9a703a67f8f6c957a0aaffa7272b3174f09a))
+* startCamera() private ([c9af2a9](https://na-at.xp-dev.com/git/FAD-ACUANT/commit/c9af2a9ed690e1915b29f820dd25a21e62970227))
+* uploadImage() private and async ([4c37750](https://na-at.xp-dev.com/git/FAD-ACUANT/commit/4c377502f8b41dbc1ce827126797aaa27201d384))
+
+## [5.1.0-alpha.0](https://na-at.xp-dev.com/git/FAD-ACUANT/compare/v5.0.1-alpha.1...v5.1.0-alpha.0) (2023-05-12)
+
+
+### Features
+
+* support for custom language response ([0d36a8c](https://na-at.xp-dev.com/git/FAD-ACUANT/commit/0d36a8cabd111988c18fb0c3463d9fe1d4647645))
+
+## [5.0.1-alpha.1](https://na-at.xp-dev.com/git/FAD-ACUANT/compare/v5.0.1-alpha.0...v5.0.1-alpha.1) (2023-05-09)
+
+
+### Bug Fixes
+
+* fix AcuantForceRegularCapture to true for iphones with iframe ([0c82075](https://na-at.xp-dev.com/git/FAD-ACUANT/commit/0c82075a8fe5643332e084787519ba0df34ceafe))
+
+## [5.0.1-alpha.0](https://na-at.xp-dev.com/git/FAD-ACUANT/compare/v5.0.0...v5.0.1-alpha.0) (2023-05-09)
+
+
+### Bug Fixes
+
+* capture mode in iframe ([f4ebfec](https://na-at.xp-dev.com/git/FAD-ACUANT/commit/f4ebfece836b4c21a5b659ce2d7f6ffbdfc71e29))
+
 ## [5.0.0](https://na-at.xp-dev.com/git/FAD-ACUANT/compare/v4.0.0...v5.0.0) (2023-03-21)
 
 

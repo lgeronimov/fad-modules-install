@@ -132,3 +132,4 @@ The following properties are for a more specific configuration of the module
 | onerror           | ResponseError   | Is called when an error happens                         |
 | onclose           | void            | Is called when user close component                     |
 | onnoflashdetected | void            | Is called when dispositive doesn't support camera flash |
+

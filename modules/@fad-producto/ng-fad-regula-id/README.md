@@ -32,6 +32,29 @@ Change noImplicitOverride and noImplicitReturns to false on tsonfig.json file
 }
 ```
 
+## License
+Add the license file provided by the technical team
+
+## Configuration project
+
+In angular.json file add assets
+
+``` ts
+.
+.
+"assets": [
+    .
+    .
+    {
+      "glob": "**/*",
+      "input": "node_modules/@fad-producto/ng-fad-regula-id/assets",
+      "output": "./assets/"
+    }
+  ]
+  .
+  .
+```
+
 ## Import
 
 In the file necessary *example.module.ts* import the module.
@@ -62,12 +85,12 @@ Add the selector inside some component and configure the output events:
 <ng-fad-regula-id
   [configuration]="configuration"
   [credentials]="credentials"
-  [side]="side"
-  [shotOne]="shotOne"
   [idData]="idData"
   [idPhoto]="idPhoto"
+  [captureType]="captureType"
   (oncomplete)="oncomplete($event)"
-  (onerror)="onerror($event)">
+  (onerror)="onerror($event)"
+  (onclose)="onclose()">
 </ng-fad-regula-id>
 ```
 
@@ -76,21 +99,17 @@ Add the selector inside some component and configure the output events:
 Listen to the events:
 
 ``` ts
-import { Credentials, IRegulaIdConfiguration, ResponseError, ResponseSuccess } from '@fad-producto/ng-fad-regula-id';
+import { CAPTURE_TYPE, Credentials, IRegulaIdConfiguration, ResponseError, ResponseSuccess } from '@fad-producto/ng-fad-regula-id';
 .
 .
 .
 public configuration: IRegulaIdConfiguration;
-
 public credentials: Credentials = {
-    license: 'assets/third-party/regula/regula.license',
-    apiBasePath: environment.BASE_URL_REGULA
+    license: 'license_base64',
 };
-
-public shotOne = "image base64 of first capture";
-public side = 0;
 public idData = true;
 public idPhoto = false;
+captureType = CAPTURE_TYPE.CAMERA_SNAPSHOT;
 
 oncomplete(result: ResponseSuccess) {
   console.log(result)
@@ -109,30 +128,37 @@ onclose() {
 # Inputs
 
 
-| Name           | Required   | Default                                 |  Type                  | Description                                            |
-| -----------    | ---------- | --------------------------------------- | ---------------------- | ------------------------------------------------------ |
-| configuration  |   false    |  CONFIGURATION_DEFAULT                  | IRegulaIdConfiguration | Configuration module                                   |
-| credentials    |   true     |  undefined                              | Credentials            | Route to license file and request api                  |
-| side           |   true     |  0                                      | 0 or 1                 | Side of image to capture, 0 - Front, 1 - Back          |
-| shotOne        |   false    |  undefined                              | string                 | Base 64 of first captured image                        |
-| idData         |   false    |  false                                  | boolean                | Add OCR to the final response                          |
-| idPhoto        |   false    |  false                                  | boolean                | Image of the face cutout, only works if idData is true |
+| Name           | Required                        | Default                                 |  Type                  | Description                                            |
+| -----------    | ------------------------------- | --------------------------------------- | ---------------------- | ------------------------------------------------------ |
+| configuration  |   false                         |  CONFIGURATION_DEFAULT                  | IRegulaIdConfiguration | Configuration module                                   |
+| credentials    |   true                          |  undefined                              | Credentials            | License base64 and path to request api                  |
+| idData         |   false                         |  false                                  | boolean                | Add OCR to the final response                          |
+| idPhoto        |   false                         |  false                                  | boolean                | Image of the face cutout, only works if idData is true |
+| captureType    |   true (only in mobile devices) |  undefined                              | CAPTURE_TYPE           | Capture type, DOCUMENT_READER for automatic capture and CAMERA_SNAPSHOT for manual capture. This captureType only works on mobile devices |
 
 
 ## IRegulaIdConfiguration
 
-
 The following properties are for a more specific configuration of the module
 
-| Name                | Type                       |  Required  | Default                   | Description                                                |
-| ------------------- | -------------------------- | ---------- |-------------------------- | ---------------------------------------------------------- |
-| allowClose          | boolean                    |  false     | false                     | allows closing of the capture component                    |
+| Name                              | Type                       |  Required  | Default                   | Description                                                                       |
+| --------------------------------- | -------------------------- | ---------- |-------------------------- | --------------------------------------------------------------------------------- |
+| idValidations.cardMatch           | boolean                    |  false     | true                      | Allows you to validate if the captured credentials are being correctly classified |
+| For CAPTURE_TYPE.CAMERA_SNAPSHOT                                                                                                                                                            |
+| cameraSnapshot.changeCameraButton | boolean                    |  false     | true                      | Allows you to switch cameras to improve focus                                     |
+| cameraSnapshot.closeButton        | boolean                    |  false     | false                     | Add a button that closes the module                                               |
+| For CAPTURE_TYPE.DOCUMENT_READER                                                                                                                                                            |
+| documentReader.captureButton      | boolean                    |  false     | false                     | Add a button to capture manually. Only processes one side of the ID               |
+| documentReader.closeButton        | boolean                    |  false     | false                     | Add a button that closes the module                                               |
+| documentReader.changeCameraButton | boolean                    |  false     | false                     | Allows you to switch cameras to improve focus                                     |
+| documentReader.timeout            | number                     |  false     | 30000                     | Maximum capture time per id side in milliseconds                                  |
+
 
 
 # Outputs
 
-| Name        | Return          | Description                                |
-| ----------- | --------------- | ------------------------------------------ |
-| oncomplete  | ResponseSuccess | Fires when the liveness ends successfully  |
-| onerror     | ResponseError   | Is called when an error happens            |
-| onclose     | void            | Fires when user closes the camera          |
+| Name        | Return          | Description                                  |
+| ----------- | --------------- | -------------------------------------------- |
+| oncomplete  | ResponseSuccess | Fires when the id capture ends successfully  |
+| onerror     | ResponseError   | Is called when an error happens              |
+| onclose     | void            | Fires when user closes the camera            |

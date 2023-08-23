@@ -12,6 +12,9 @@ npm install @fad-producto/ng-fad-identy-face
 npm install @fad-producto/ng-fad-identy-face --legacy-peer-deps
 ```
 
+## Credentials
+The module has an entry called credentials, this is a URL that points to the server where it will process the data. The URL must be requested to the technology team
+
 ## Configuration project
 
 In angular.json file add assets and styles

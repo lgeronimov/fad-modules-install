@@ -3,7 +3,7 @@
 ## Installation
 
 ``` bash
-npm install @fad-producto/@fad-producto/ng-fad-identy-fingerprints
+npm install @fad-producto/ng-fad-identy-fingerprints
 ```
 
 ## Server
